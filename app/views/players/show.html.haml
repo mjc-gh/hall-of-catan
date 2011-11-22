@@ -3,8 +3,11 @@
 = link_to 'Edit Player', edit_player_path(@player), :class => 'right'
 
 .indent
-  %p
+  %p.right
     %strong Record:
     %span #{@player.win_count}
     = "/"
     %span #{@player.game_count}
+
+  %h3 Games
+  = render 'games/list', :games => @player.games

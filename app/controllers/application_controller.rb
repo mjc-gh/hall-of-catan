@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
 
   respond_to :html, :mobile, :json, :xml
   
-  before_filter :determine_format
+  #before_filter :determine_format
   before_filter :access_required
 
-  #rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
-  #rescue_from ActionController::UnknownAction, :with => :render_not_found
-  #rescue_from ActionController::RoutingError, :with => :render_not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+  rescue_from ActionController::UnknownAction, :with => :render_not_found
+  rescue_from ActionController::RoutingError, :with => :render_not_found
   
   def render_not_found
     render_error I18n.t('flash.alert.not_found'), 404

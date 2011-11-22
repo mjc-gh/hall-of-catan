@@ -1,0 +1,6 @@
+= link_to 'Add Game', new_game_path, :class => 'right'
+
+%h2 Games
+  
+.indent
+  = render 'games/list', :games => @games

@@ -1,0 +1,8 @@
+dl { width: 400px; margin: 0 auto; }
+dl dt { line-height:25px; margin:15px 0; }
+dl dd { line-height:20px; margin:0 0 10px; overflow:hidden; }
+dl dd[align=right] { text-align:right; margin:40px 0 0;}
+dl dd input[type=password], dl dd input[type=text], dl dd select { min-width:300px; }
+dl dd input, dl dd button { font-size: 16px; }
+
+dl dd select.date { min-width:inherit; }

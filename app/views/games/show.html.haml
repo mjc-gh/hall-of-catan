@@ -1,0 +1,23 @@
+%h2 Game
+
+= link_to 'Edit Game', edit_game_path(@game), :class => 'right'
+
+.indent.game
+  .left
+    %h3 Location
+    = link_to @game.location.name, location_path(@game.location)
+
+    %h3.spaced Players
+    = render 'players/list', :players => @game.players
+
+    %h3.spaced Notes
+    %p #{@game.notes}
+
+  .right
+    %h3 Winner
+    %p #{@game.winner.full_name}
+
+    %h3.spaced Played On
+    %p #{@game.played_on} 
+    %em (#{time_ago_in_words(@game.played_on)} ago)
+    

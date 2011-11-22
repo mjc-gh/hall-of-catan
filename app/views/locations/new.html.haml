@@ -1,0 +1,12 @@
+%h2 New Location
+  
+= form_for @location do |f|
+  = render "shared/error_messages", :target => @location
+  %dl
+    %dt
+      = f.label :name
+    %dd
+      = f.text_field :name
+      
+    %dd{:align => 'right'}
+      = f.submit 'Create'

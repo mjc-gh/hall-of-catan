@@ -1,0 +1,37 @@
+%h2 New Game
+
+= form_for @game do |f|
+  = render "shared/error_messages", :target => @game
+  %dl
+    %dt 
+      = f.label :played_on
+    %dd
+      = f.date_select :played_on, { :start_year => Time.now.year }, { :class => 'date' }
+      
+    %dt
+      = f.label :notes
+    %dd
+    = f.text_field :notes
+  
+    %dt
+      = f.label :location_id
+    %dd
+      = f.select :location_id, @locations.collect { |l| [l.name, l.id] }, :include_blank => true
+    
+    %dd
+      = f.label :winner_id
+    %dd
+      = f.select :winner_id, @players.collect { |l| [l.full_name, l.id] }, :include_blank => true
+    
+    %dt
+      = label_tag 'game[player_ids][]', 'Players'
+      - (@game.players.any? ? @game.players : 2.times).each do |player|
+        %dd
+          - options = options_from_collection_for_select(@players, :id, :full_name, player.is_a?(Fixnum) ? nil : player.id)
+          = select_tag 'game[player_ids][]', options, :include_blank => true
+    
+    %dd
+      = link_to_function 'more players', 'add_player(this)', :class => 'right'
+      
+    %dd{:align => 'right'}
+      = f.submit 'Create'

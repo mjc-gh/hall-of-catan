@@ -1,0 +1,4 @@
+%ul.players
+  - players.each do |player|
+    %li
+      = link_to player.full_name, player_path(player)

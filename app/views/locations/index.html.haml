@@ -1,0 +1,10 @@
+%h2 Locations
+
+= link_to 'Add Location', new_location_path, :class => 'right'
+
+.indent
+  %ul.locations
+    - @locations.each do |location|
+      %li
+        = link_to location.name, location_path(location)
+    

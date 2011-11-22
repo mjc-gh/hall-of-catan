@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %title The Hall of Catan
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    
+    = stylesheet_link_tag    "http://fonts.googleapis.com/css?family=IM+Fell+Double+Pica+SC"
+
+  %body
+    #page
+      #header 
+        %h1 
+          = link_to 'The Hall of Catan', root_path
+        %ul
+          %li
+            = link_to 'Players', players_path
+          %li
+            = link_to 'Locations', locations_path
+          %li
+            = link_to 'Games', games_path
+          
+        
+      #content
+        #messages
+          - [:notice, :alert].each do |type|
+            - if flash[type]
+              = content_tag :h2, flash[type], :class => "flash #{type}"
+              
+        = yield

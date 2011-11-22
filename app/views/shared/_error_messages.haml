@@ -1,0 +1,8 @@
+- if target.errors.any?
+  .error-msg
+    %h5
+      = pluralize(target.errors.count, 'error')
+      occured
+    %ul
+      - target.errors.full_messages.each do |msg|
+        %li= msg

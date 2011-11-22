@@ -1,0 +1,10 @@
+%h2 #{@player.full_name}
+
+= link_to 'Edit Player', edit_player_path(@player), :class => 'right'
+
+.indent
+  %p
+    %strong Record:
+    %span #{@player.win_count}
+    = "/"
+    %span #{@player.game_count}

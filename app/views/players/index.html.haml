@@ -1,0 +1,7 @@
+%h2 Players
+
+= link_to 'Add Player', new_player_path, :class => 'right'
+  
+.indent
+  = render 'players/list', :players => @players
+    

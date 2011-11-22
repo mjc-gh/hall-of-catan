@@ -1,0 +1,8 @@
+%h2 #{@location.name}
+
+= link_to 'Edit Location', edit_location_path(@location), :class => 'right'
+
+.indent
+  %h3 Games
+  
+  = render 'games/list', :games => @location.games

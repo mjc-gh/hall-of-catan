@@ -18,6 +18,7 @@ class GamesControllerTest < ActionController::TestCase
   
   test "create" do
     Game.any_instance.stubs(:valid?).returns(true)
+    
     post :create
     
     assert_redirected_to game_url(assigns(:game))

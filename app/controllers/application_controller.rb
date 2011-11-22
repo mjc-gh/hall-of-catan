@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
   before_filter :determine_format
   before_filter :access_required
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
-  rescue_from ActionController::UnknownAction, :with => :render_not_found
-  rescue_from ActionController::RoutingError, :with => :render_not_found
+  #rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+  #rescue_from ActionController::UnknownAction, :with => :render_not_found
+  #rescue_from ActionController::RoutingError, :with => :render_not_found
   
   def render_not_found
     render_error I18n.t('flash.alert.not_found'), 404
@@ -38,9 +38,9 @@ class ApplicationController < ActionController::Base
     @is_mobile ||= params[:_mobile] == '1' || request.user_agent =~ /iPhone|iPad|android/
   end
   
-  def has_access?
-    !session[:has_access].nil?
-  end
+  # def has_access?
+  #   !session[:has_access].nil?
+  # end
   
   def access_required
     if authenticate
@@ -57,5 +57,5 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  helper_method :has_access?
+  #helper_method :has_access?
 end

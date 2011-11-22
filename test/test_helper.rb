@@ -11,11 +11,11 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   def grant_access!
-    @controller.stubs(:has_access?).returns(true)
+    @controller.stubs(:access_required).returns(true)
   end
   
   def revoke_access!
-    @controller.stubs(:has_access?).returns(false)
+    @controller.stubs(:access_required).returns(false)
   end
 end
 

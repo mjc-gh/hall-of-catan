@@ -2,19 +2,23 @@ require 'test_helper'
 
 class PlayerTest < ActiveSupport::TestCase
   test "game association" do
-    player = Factory.create(:player)
-    game = Factory.create(:game, :players => [player])
+    p1 = Factory.create(:player)
+    p2 = Factory.create(:player)
     
-    assert_equal player, game.players.first
-    assert_equal 1, player.games.size
+    game = Factory.create(:game, :players => [p1, p2], :winner => p1)
+    
+    assert_equal p1, game.players.first
+    assert_equal 1, p1.games.size
   end
   
   test "wins association" do
-    player = Factory.create(:player)
-    game = Factory.create(:game, :players => [player], :winner => player)
+    p1 = Factory.create(:player)
+    p2 = Factory.create(:player)
     
-    assert_equal player, game.winner
-    assert_equal 1, player.wins.size
+    game = Factory.create(:game, :players => [p1, p2], :winner => p1)
+    
+    assert_equal p1, game.winner
+    assert_equal 1, p1.wins.size
   end
   
   test "game count" do

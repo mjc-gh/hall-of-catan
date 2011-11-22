@@ -25,7 +25,7 @@ class Game < ActiveRecord::Base
     names += players.collect { |p| p.id == winner.id ? nil : p.initials }
     names.compact!
     
-    "#{names.join(', ')} @ #{location.name}" 
+    "#{names.join(', ')} @ #{location.name} on #{played_on}" 
   end
 
   protected

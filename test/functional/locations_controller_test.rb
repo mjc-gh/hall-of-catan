@@ -39,6 +39,22 @@ class LocationsControllerTest < ActionController::TestCase
     assert assigns(:locations)
   end
   
+  test "show" do
+    location = Factory.create(:location)
+    get :show, :id => location.id
+    
+    assert_response :success
+    assert_template :show
+    assert assigns(:location)
+  end
+  
+  test "show invalid" do
+    get :show, :id => '0'
+    
+    assert_redirected_to root_url
+    assert flash[:alert]
+  end  
+  
   test "edit" do
     location = Factory.create(:location)
     get :edit, :id => location.id

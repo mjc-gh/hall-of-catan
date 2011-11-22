@@ -40,6 +40,22 @@ class GamesControllerTest < ActionController::TestCase
     assert assigns(:games)
   end
   
+  test "show" do
+    game = Factory.create(:game)
+    get :show, :id => game.id
+    
+    assert_response :success
+    assert_template :show
+    assert assigns(:game)
+  end
+  
+  test "show invalid" do
+    get :show, :id => '0'
+    
+    assert_redirected_to root_url
+    assert flash[:alert]
+  end    
+  
   test "edit" do
     game = Factory.create(:game)
     get :edit, :id => game.id

@@ -1,7 +1,19 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    grant_access!
+  end
+  
+  teardown do
+    mocha_teardown
+  end  
+  
+  test "index" do
+    get :index
+    
+    assert_response :success
+    assert_template :index
+    assert assigns(:games)
+  end
 end

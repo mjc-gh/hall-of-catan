@@ -39,6 +39,22 @@ class PlayersControllerTest < ActionController::TestCase
     assert assigns(:players)
   end
   
+  test "show" do
+    player = Factory.create(:player)
+    get :show, :id => player.id
+    
+    assert_response :success
+    assert_template :show
+    assert assigns(:player)
+  end
+  
+  test "show invalid" do
+    get :show, :id => '0'
+    
+    assert_redirected_to root_url
+    assert flash[:alert]
+  end
+  
   test "edit" do
     player = Factory.create(:player)
     get :edit, :id => player.id

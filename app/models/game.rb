@@ -21,11 +21,10 @@ class Game < ActiveRecord::Base
   end
 
   def details
-    names = [winner.initials]
-    names += players.collect { |p| p.id == winner.id ? nil : p.initials }
+    names = players.collect { |p| p.id == winner.id ? nil : p.initials }
     names.compact!
     
-    "#{names.join(', ')} @ #{location.name} on #{played_on}" 
+    "#{winner.initials} over #{names.join(', ')} at #{location.name} on #{played_on}" 
   end
 
   protected
@@ -35,6 +34,6 @@ class Game < ActiveRecord::Base
   end
   
   def winner_in_players
-    errors[:winner] << "Winner must be in players" unless players.include?(winner)
+    errors[:winner] << "is not in players list" unless players.include?(winner)
   end
 end

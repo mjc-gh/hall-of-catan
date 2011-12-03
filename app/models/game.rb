@@ -1,5 +1,12 @@
 class Game < ActiveRecord::Base
-  has_and_belongs_to_many :players, :uniq => true
+  has_and_belongs_to_many :players, :uniq => true do
+    def without(player)
+      players = self.dup
+      players.delete(player)
+      
+      players
+    end
+  end
   
   belongs_to :location
   belongs_to :winner, :class_name => 'Player', :foreign_key => :winner_id
@@ -18,13 +25,6 @@ class Game < ActiveRecord::Base
     game.players.each do |player|
       Player.increment_counter :game_count, player.id
     end
-  end
-
-  def details
-    names = players.collect { |p| p.id == winner.id ? nil : p.initials }
-    names.compact!
-    
-    "#{winner.initials} over #{names.join(', ')} at #{location.name} on #{played_on}" 
   end
 
   protected

@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
   validate :has_players
   validate :winner_in_players
 
-  default_scope order('created_at')
+  default_scope order('played_on DESC, created_at DESC')
 
   after_create do |game|
     Player.increment_counter :win_count, game.winner.id if game.winner

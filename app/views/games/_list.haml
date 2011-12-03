@@ -1,4 +1,15 @@
 %ul.games
   - games.each do |game|
     %li
-      = link_to game.details, game_path(game)
+      %p.winner
+        = link_to "#{game.winner.full_name} won #{time_ago_in_words(game.played_on)} ago", game_path(game)
+      
+      %p
+        %em
+          Players:
+        = game.players.without(game.winner).map { |p| link_to(h(p.full_name), player_path(p)) }.join(', ').html_safe
+        
+      %p 
+        %em 
+          Location:
+        = link_to game.location.name, location_path(game.location)

@@ -15,9 +15,10 @@
 
   .right
     %h3 Winner
-    %p #{@game.winner.full_name}
+    %p 
+      =link_to @game.winner.full_name, player_path(@game.winner)
 
     %h3.spaced Played On
-    %p #{@game.played_on} 
+    %p #{@game.played_on}
     %em (#{time_ago_in_words(@game.played_on)} ago)
     

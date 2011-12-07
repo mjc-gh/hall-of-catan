@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
-  has_and_belongs_to_many :players, :uniq => true do
+  has_many :matches
+  has_many :players, :through => :matches, :uniq => true, :order => 'matches.position' do
     def without(player)
       players = self.dup
       players.delete(player)
@@ -17,7 +18,7 @@ class Game < ActiveRecord::Base
   validate :has_players
   validate :winner_in_players
 
-  default_scope order('played_on DESC, created_at DESC')
+  scope :recent, order('played_on DESC, created_at DESC')
 
   after_create do |game|
     Player.increment_counter :win_count, game.winner.id if game.winner

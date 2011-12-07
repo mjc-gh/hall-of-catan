@@ -17,6 +17,8 @@ class ActiveSupport::TestCase
   def revoke_access!
     @controller.stubs(:access_required).returns(false)
   end
+  
+  include Factory::Syntax::Methods
 end
 
 require 'mocha'

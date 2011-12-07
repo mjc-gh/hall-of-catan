@@ -41,7 +41,7 @@ class GamesControllerTest < ActionController::TestCase
   end
   
   test "show" do
-    game = Factory.create(:game)
+    game = create(:game)
     get :show, :id => game.id
     
     assert_response :success
@@ -57,7 +57,7 @@ class GamesControllerTest < ActionController::TestCase
   end    
   
   test "edit" do
-    game = Factory.create(:game)
+    game = create(:game)
     get :edit, :id => game.id
     
     assert_response :success
@@ -68,7 +68,7 @@ class GamesControllerTest < ActionController::TestCase
   test "update" do
     Game.any_instance.stubs(:valid?).returns(true)
     
-    game = Factory.create(:game)
+    game = create(:game)
     put :update, :id => game.id
     
     assert_redirected_to game_url(assigns(:game))
@@ -76,7 +76,7 @@ class GamesControllerTest < ActionController::TestCase
   end
   
   test "update invalid" do
-    game = Factory.create(:game)
+    game = create(:game)
     put :update, :id => game.id 
     
     assert_template #:edit

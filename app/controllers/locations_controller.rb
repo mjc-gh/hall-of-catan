@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
   before_filter :find_location, :except =>  [:index, :new, :create]
   
   def index
-    @locations = Location.all
+    @locations = Location.by_name
     respond_with @locations
   end
 

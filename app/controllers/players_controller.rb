@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   before_filter :find_player, :except =>  [:index, :new, :create]
   
   def index
-    @players = Player.all
+    @players = Player.by_name
     respond_with @players
   end
 

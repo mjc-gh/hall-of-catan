@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_filter :load_locations_and_players, :only => [:new, :create, :edit, :update]
   
   def index
-    @games = Game.all
+    @games = Game.recent
     respond_with @games
   end
 
@@ -26,7 +26,14 @@ class GamesController < ApplicationController
   end
   
   def update
-    @game.update_attributes(params[:game])
+    if @game.update_attributes(params[:game])
+      player_ids = params[:game][:player_ids].collect { |id| id.to_i }
+      
+      @game.matches.each do |match|
+        match.update_attribute(:position, player_ids.index(match.player_id))
+      end
+    end
+    
     respond_with @game
   end
   
@@ -43,7 +50,7 @@ class GamesController < ApplicationController
   end
   
   def load_locations_and_players
-    @players = Player.all
-    @locations = Location.all
+    @players = Player.by_name
+    @locations = Location.by_name
   end
 end

@@ -5,9 +5,10 @@
 .indent
   %p.right
     %strong Record:
-    %span #{@player.win_count}
+    %br
+    %span #{@player.win_count} W
     = "/"
-    %span #{@player.game_count}
+    %span #{@player.game_count - @player.win_count} L
 
   %h3 Games
   = render 'games/list', :games => @player.games

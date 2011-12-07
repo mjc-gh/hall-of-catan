@@ -20,5 +20,4 @@
 
     %h3.spaced Played On
     %p #{@game.played_on}
-    %em (#{time_ago_in_words(@game.played_on)} ago)
-    
+    %em (#{date_ago_in_words(@game.played_on)})

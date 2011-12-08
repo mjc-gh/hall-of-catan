@@ -27,10 +27,12 @@ class GamesController < ApplicationController
   
   def update
     if @game.update_attributes(params[:game])
-      player_ids = params[:game][:player_ids].collect { |id| id.to_i }
+      if params[:game] && params[:game][:player_ids]
+        player_ids = params[:game][:player_ids].collect { |id| id.to_i }
       
-      @game.matches.each do |match|
-        match.update_attribute(:position, player_ids.index(match.player_id))
+        @game.matches.each do |match|
+          match.update_attribute(:position, player_ids.index(match.player_id))
+        end
       end
     end
     

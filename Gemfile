@@ -42,6 +42,6 @@ group :test do
   gem 'factory_girl_rails'  
   gem 'mocha', :require => false
   # # Pretty printed test output
-  # gem 'turn', :require => false
+  gem 'turn', :require => false
   gem 'minitest'
 end

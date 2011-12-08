@@ -17,11 +17,21 @@ class GamesControllerTest < ActionController::TestCase
   end
   
   test "create" do
-    Game.any_instance.stubs(:valid?).returns(true)
+    player_ids = 4.times.collect { |n| create(:player).id }
+    data = {
+      :location_id => create(:location).id,
+      :player_ids => player_ids,
+      :winner_id => player_ids[1]
+    }
     
-    post :create
+    post :create, :game => attributes_for(:game, data)
     
-    assert_redirected_to game_url(assigns(:game))
+    assert assigns(:game)
+    game = assigns(:game).reload
+    
+    4.times.each { |n| assert_equal player_ids[n], game.players[n].id }
+    
+    assert_redirected_to game_url(game)
     assert flash[:notice]
   end
   
@@ -66,7 +76,8 @@ class GamesControllerTest < ActionController::TestCase
   end
   
   test "update" do
-    Game.any_instance.stubs(:valid?).returns(true)
+    game = create :game
+    put :update, :id => game.id, :game => { :notes => 'Notes' }
     
     game = create(:game)
     put :update, :id => game.id
@@ -75,11 +86,24 @@ class GamesControllerTest < ActionController::TestCase
     assert flash[:notice]
   end
   
+  test "update reorder" do
+    game = create :game
+    player_ids = game.players.collect { |p| p.id }.shuffle
+    
+    put :update, :id => game.id, :game => { :player_ids => player_ids }
+    
+    assert assigns(:game)
+    game = assigns(:game).reload
+    
+    4.times.each { |n| assert_equal player_ids[n], game.players[n].id }
+    assert_redirected_to game_url(assigns(:game))
+  end
+  
   test "update invalid" do
     game = create(:game)
-    put :update, :id => game.id 
+    put :update, :id => game.id, :game => { :winner_id => nil }
     
-    assert_template #:edit
+    assert_template :edit
     assert assigns(:game)
-  end  
+  end
 end

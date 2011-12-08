@@ -17,8 +17,9 @@ class LocationsControllerTest < ActionController::TestCase
   end
   
   test "create" do
-    Location.any_instance.stubs(:valid?).returns(true)
-    post :create
+    assert_difference('Location.count') do
+      post :create, :location => attributes_for(:location)
+    end
     
     assert_redirected_to location_url(assigns(:location))
     assert flash[:notice]
@@ -40,7 +41,7 @@ class LocationsControllerTest < ActionController::TestCase
   end
   
   test "show" do
-    location = Factory.create(:location)
+    location = create(:location)
     get :show, :id => location.id
     
     assert_response :success
@@ -56,7 +57,7 @@ class LocationsControllerTest < ActionController::TestCase
   end  
   
   test "edit" do
-    location = Factory.create(:location)
+    location = create(:location)
     get :edit, :id => location.id
     
     assert_response :success
@@ -65,20 +66,18 @@ class LocationsControllerTest < ActionController::TestCase
   end
   
   test "update" do
-    Location.any_instance.stubs(:valid?).returns(true)
-    
-    location = Factory.create(:location)
-    put :update, :id => location.id
+    location = create :location
+    put :update, :id => location.id, :location => attributes_for(:location)
     
     assert_redirected_to location_url(assigns(:location))
     assert flash[:notice]
   end
   
   test "update invalid" do
-    location = Factory.create(:location)
-    put :update, :id => location.id
+    location = create(:location)
+    put :update, :id => location.id, :location => { :name => 0 }
     
-    assert_template #:edit
+    assert_template :edit
     assert assigns(:location)
-  end  
+  end
 end

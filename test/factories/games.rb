@@ -4,7 +4,7 @@ FactoryGirl.define do
     played_on Time.now
     
     location { association(:location) }
-    players { [association(:player), association(:player)] }
+    players { 4.times.collect { association(:player) } }
     winner { players.first }
   end
 end

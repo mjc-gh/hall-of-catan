@@ -17,8 +17,9 @@ class PlayersControllerTest < ActionController::TestCase
   end
   
   test "create" do
-    Player.any_instance.stubs(:valid?).returns(true)
-    post :create
+    assert_difference('Player.count') do
+      post :create, :player => attributes_for(:player)
+    end
     
     assert_redirected_to player_url(assigns(:player))
     assert flash[:notice]
@@ -40,7 +41,7 @@ class PlayersControllerTest < ActionController::TestCase
   end
   
   test "show" do
-    player = Factory.create(:player)
+    player = create(:player)
     get :show, :id => player.id
     
     assert_response :success
@@ -49,14 +50,14 @@ class PlayersControllerTest < ActionController::TestCase
   end
   
   test "show invalid" do
-    get :show, :id => '0'
+    get :show, :id => 0
     
     assert_redirected_to root_url
     assert flash[:alert]
   end
   
   test "edit" do
-    player = Factory.create(:player)
+    player = create(:player)
     get :edit, :id => player.id
     
     assert_response :success
@@ -65,20 +66,18 @@ class PlayersControllerTest < ActionController::TestCase
   end
   
   test "update" do
-    Player.any_instance.stubs(:valid?).returns(true)
-    
-    player = Factory.create(:player)
-    put :update, :id => player.id
+    player = create(:player)
+    put :update, :id => player.id, :player => attributes_for(:player)
     
     assert_redirected_to player_url(assigns(:player))
     assert flash[:notice]
   end
   
   test "update invalid" do
-    player = Factory.create(:player)
-    put :update, :id => player.id
+    player = create(:player)
+    put :update, :id => player.id, :player => { :first_name => 0 }
     
-    assert_template #:edit
+    assert_template :edit
     assert assigns(:player)
   end  
 end

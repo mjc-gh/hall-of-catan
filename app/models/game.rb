@@ -1,6 +1,9 @@
 class Game < ActiveRecord::Base
+  # See https://github.com/rails/rails/issues/520
   has_many :matches
-  has_many :players, :through => :matches, :uniq => true, :order => 'matches.position' do
+  #has_many :players, :through => :matches, :uniq => true, :order => 'matches.position' do
+  has_many :players, :through => :matches, :select => 'DISTINCT players.*, matches.position', 
+           :order => 'matches.position', :uniq => true do
     def without(player)
       players = self.dup
       players.delete(player)

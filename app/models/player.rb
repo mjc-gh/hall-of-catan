@@ -1,9 +1,12 @@
 class Player < ActiveRecord::Base
   attr_accessible :first_name, :last_name
 
+  # See https://github.com/rails/rails/issues/520
   has_many :matches
-  has_many :games, :through => :matches, :uniq => true, :order => 'matches.position'
+  has_many :games, :through => :matches, :select => 'DISTINCT games.*, matches.position', :order => 'matches.position', :uniq => true
+  #has_many :games, :through => :matches, :uniq => true, :order => 'matches.position'
   
+    
   has_many :wins, :class_name => 'Game', :foreign_key => :winner_id
 
   validates_length_of :first_name, :within => 2..30

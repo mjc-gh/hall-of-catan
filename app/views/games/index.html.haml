@@ -3,6 +3,8 @@
 %h2 Games
   
 .indent
+  %h3.right Total: #{@games.total_entries}
+  
   = render 'games/list', :games => @games
 
 = will_paginate @games

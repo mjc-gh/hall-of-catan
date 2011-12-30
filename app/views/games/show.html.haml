@@ -18,6 +18,9 @@
     %p 
       =link_to @game.winner.full_name, player_path(@game.winner)
 
+    %h3.spaced Version
+    %p #{@game.version_value}
+
     %h3.spaced Played On
     %p #{@game.played_on}
     %em (#{date_ago_in_words(@game.played_on)})

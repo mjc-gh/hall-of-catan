@@ -1,4 +1,6 @@
 class Game < ActiveRecord::Base
+  VERSIONS = { 1 => :settlers_of_catan, 2 => :seafarers_of_catan }
+  
   # See https://github.com/rails/rails/issues/520
   has_many :matches
   #has_many :players, :through => :matches, :uniq => true, :order => 'matches.position' do
@@ -17,6 +19,7 @@ class Game < ActiveRecord::Base
   
   validates_presence_of :winner_id, :location_id, :played_on
   validates_associated :winner, :location
+  validates_inclusion_of :version, :in => VERSIONS.keys
   
   validate :has_players
   validate :winner_in_players
@@ -29,6 +32,10 @@ class Game < ActiveRecord::Base
     game.players.each do |player|
       Player.increment_counter :game_count, player.id
     end
+  end
+
+  def version_value
+    VERSIONS[version].to_s.titleize
   end
 
   protected

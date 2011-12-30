@@ -11,8 +11,13 @@
     %dt
       = f.label :notes
     %dd
-    = f.text_field :notes
-  
+      = f.text_field :notes
+
+    %dt
+      = f.label :version
+    %dd
+      = f.select :version, options_from_hash(Game::VERSIONS), :include_blank => true
+    
     %dt
       = f.label :location_id
     %dd

@@ -42,32 +42,40 @@ class GameTest < ActiveSupport::TestCase
   test "location assocaition" do
     game = build(:game, :location => nil)
     
-    assert !game.valid?
-    assert game.errors[:location_id].any?
+    assert game.invalid?
+    assert_includes game.errors, :location_id
     
     game = build(:game)
     
     assert game.valid?
-    assert game.errors[:location].empty?
   end
   
   test "winner association" do
     game = build(:game, :winner => nil)
     
-    assert !game.valid?
-    assert game.errors[:winner_id].any?
+    assert game.invalid?
+    assert_includes game.errors, :winner_id
     
     game = build(:game)
     
     assert game.valid?
-    assert game.errors[:winner].empty?
   end
   
   test "winner not in players" do
     winner = create(:player)
     game = build(:game, :winner => winner)
     
-    assert !game.valid?
-    assert game.errors[:winner].any?
+    assert game.invalid?
+    assert_includes game.errors, :winner
+  end
+  
+  test "catan version" do
+    game = build(:game, :version => nil)
+    
+    assert game.invalid?
+    assert_includes game.errors, :version
+    
+    game = build(:game)
+    assert game.valid?
   end
 end

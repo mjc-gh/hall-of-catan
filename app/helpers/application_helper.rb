@@ -8,4 +8,8 @@ module ApplicationHelper
       'today'
     end
   end
+  
+  def options_from_hash(hash)
+    hash.collect { |k, v| [v, k] }
+  end
 end

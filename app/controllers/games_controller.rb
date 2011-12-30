@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_filter :load_locations_and_players, :only => [:new, :create, :edit, :update]
   
   def index
-    @games = Game.recent
+    @games = Game.recent.paginate(:page => params[:page])
     respond_with @games
   end
 

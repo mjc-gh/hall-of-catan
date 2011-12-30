@@ -1,6 +1,8 @@
 class Game < ActiveRecord::Base
   VERSIONS = { 1 => :settlers_of_catan, 2 => :seafarers_of_catan }
   
+  self.per_page = 5
+  
   # See https://github.com/rails/rails/issues/520
   has_many :matches
   #has_many :players, :through => :matches, :uniq => true, :order => 'matches.position' do

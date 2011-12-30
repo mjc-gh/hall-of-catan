@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.3'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -25,6 +25,8 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'responders'
 gem 'acts_as_list'
+gem 'will_paginate', '~> 3.0'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -39,9 +41,9 @@ gem 'acts_as_list'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test do
-  gem 'factory_girl_rails'  
+  # Pretty printed test output
+  #gem 'ruby-debug19'
   gem 'mocha', :require => false
-  # # Pretty printed test output
-  gem 'turn', :require => false
-  gem 'minitest'
+  gem 'factory_girl_rails'
+  gem 'turn', '0.8.2', :require => false
 end

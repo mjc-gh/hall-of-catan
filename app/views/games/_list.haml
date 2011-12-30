@@ -2,7 +2,7 @@
   - games.each do |game|
     %li
       %p.winner
-        = link_to "#{game.winner.full_name} won #{date_ago_in_words(game.played_on)} at #{game.version_value}", game_path(game)
+        = link_to "#{game.winner.full_name} won #{date_ago_in_words(game.played_on)} at #{game.version_short_value}", game_path(game)
       
       %p
         %em Players:

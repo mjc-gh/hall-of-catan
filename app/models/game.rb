@@ -39,6 +39,10 @@ class Game < ActiveRecord::Base
   def version_value
     VERSIONS[version]
   end
+  
+  def version_short_value
+    version_value.split.first
+  end
 
   protected
 

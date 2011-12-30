@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  VERSIONS = { 1 => :settlers_of_catan, 2 => :seafarers_of_catan }
+  VERSIONS = { 1 => 'Settlers of Catan', 2 => 'Seafarers of Catan' }
   
   self.per_page = 5
   
@@ -37,7 +37,7 @@ class Game < ActiveRecord::Base
   end
 
   def version_value
-    VERSIONS[version].to_s.titleize
+    VERSIONS[version]
   end
 
   protected

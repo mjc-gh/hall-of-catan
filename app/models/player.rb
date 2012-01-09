@@ -3,7 +3,7 @@ class Player < ActiveRecord::Base
 
   # See https://github.com/rails/rails/issues/520
   has_many :matches
-  has_many :games, :through => :matches, :select => 'DISTINCT games.*, matches.position', :order => 'matches.position', :uniq => true
+  has_many :games, :through => :matches, :select => 'DISTINCT games.*, matches.position', :order => 'played_on DESC', :uniq => true
   #has_many :games, :through => :matches, :uniq => true, :order => 'matches.position'
   
     

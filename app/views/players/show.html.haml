@@ -11,4 +11,6 @@
     %span #{@player.game_count - @player.win_count} L
 
   %h3 Games
-  = render 'games/list', :games => @player.games
+  = render 'games/list', :games => @games
+
+= will_paginate @games

@@ -46,7 +46,9 @@ class PlayersControllerTest < ActionController::TestCase
     
     assert_response :success
     assert_template :show
+    
     assert assigns(:player)
+    assert assigns(:games)
   end
   
   test "show invalid" do

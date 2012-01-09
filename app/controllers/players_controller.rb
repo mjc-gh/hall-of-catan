@@ -7,6 +7,8 @@ class PlayersController < ApplicationController
   end
 
   def show
+    @games = @player.games.recent.paginate(:page => params[:page])
+    
     respond_with @player
   end
 

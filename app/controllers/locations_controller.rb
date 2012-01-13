@@ -7,6 +7,8 @@ class LocationsController < ApplicationController
   end
 
   def show
+    @games = @location.games.recent.paginate(:page => params[:page])
+
     respond_with @location
   end
 

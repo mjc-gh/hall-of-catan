@@ -13,7 +13,3 @@ function add_player(e){
 			link.remove();
 	}
 }
-
-$(function(){
-	$('select')
-});

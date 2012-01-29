@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  VERSIONS = { 1 => 'Settlers of Catan', 2 => 'Seafarers of Catan' }
+  VERSIONS = { 1 => 'Settlers of Catan', 2 => 'Seafarers of Catan', 3 => 'Cities and Knights' }
   
   self.per_page = 5
   
